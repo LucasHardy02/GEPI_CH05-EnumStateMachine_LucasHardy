@@ -23,9 +23,6 @@ public class GameStateManager : MonoBehaviour
     [Header("Debug (read only)")]
     [SerializeField] private string currentActiveState;
     [SerializeField] private string previousActiveState;
-
-
-
     private void Start()
     {
         SetState(GameState.Init);
@@ -48,9 +45,11 @@ public class GameStateManager : MonoBehaviour
 
     private void OnGameStateChanged(GameState previousState, GameState newState)
     {
-
+        //resets time scale incase game was paused last.
+        Time.timeScale = 1;
         switch (newState)
         {
+
             case GameState.Init:
                 Debug.Log($"Gamestate changed to Init");
                 SetState(GameState.MainMenu);
@@ -64,7 +63,8 @@ public class GameStateManager : MonoBehaviour
 
             case GameState.Paused:
                 Debug.Log($"Gamestate changed to Paused");
-                UIManager.ShowPausedUi();
+                UIManager.ShowPausedUI();
+                Time.timeScale = 0;
 
                 break;
 
@@ -101,10 +101,35 @@ public class GameStateManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+           TogglePause();
+        }
+    }
+    public void StartGame()
+    {
+        SetState(GameState.Gameplay);
+    }  
+    public void TogglePause()
+    {
+        if(currentState == GameState.Paused)
+        {
+            if (currentState == GameState.Gameplay) return;
+
+            SetState(GameState.Gameplay);
+        }
+
+        else if (currentState == GameState.Gameplay)
+        {
+            if (currentState == GameState.Paused) return;
+
             SetState(GameState.Paused);
         }
     }
+    public void MainMenuButton()
+    {
+
+        SetState(GameState.MainMenu);
+
+    }
 }
-        
-    
+
 
