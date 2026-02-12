@@ -8,7 +8,9 @@ public enum GameState
     Init,
     MainMenu,
     Gameplay,
-    Paused    
+    Paused,
+    Options,
+    Gameover
 }
 
 public class GameStateManager : MonoBehaviour
@@ -73,6 +75,16 @@ public class GameStateManager : MonoBehaviour
                 UIManager.ShowMainMenuUI();
                 break;
 
+            case GameState.Options:
+                Debug.Log($"Gamestate changed to Options");
+                UIManager.ShowOptionsUI();
+                break;
+            case GameState.Gameover:
+                Debug.Log($"Gamestate changed to Gameover");
+                UIManager.GameOverUI();
+                break;
+
+
             case GameState.None:
                 Debug.Log("You should not be here, there is no gamestate.");
                 break;
@@ -103,6 +115,10 @@ public class GameStateManager : MonoBehaviour
         {
            TogglePause();
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SetState(GameState.Gameover);
+        }
     }
     public void StartGame()
     {
@@ -126,9 +142,16 @@ public class GameStateManager : MonoBehaviour
     }
     public void MainMenuButton()
     {
-
         SetState(GameState.MainMenu);
 
+    }
+    public void OptionsBackButton()
+    {
+        SetState(GameState.Paused);
+    }
+    public void OptionsButton()
+    {
+        SetState(GameState.Options);
     }
 }
 

@@ -5,6 +5,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuUI;
     [SerializeField] private GameObject gameplayUI;
     [SerializeField] private GameObject pausedUI;
+    [SerializeField] private GameObject optionsUI;
+    [SerializeField] private GameObject gameOverUI;
 
     public void ShowMainMenuUI()
     {
@@ -28,8 +30,18 @@ public class UIManager : MonoBehaviour
         gameplayUI.SetActive(false);
         mainMenuUI.SetActive(false);
         pausedUI.SetActive(false);
+        gameOverUI.SetActive(false);
     }
-
+    public void ShowOptionsUI()
+    {
+        HideAllUI();
+        optionsUI.SetActive(true);
+    }
+    public void GameOverUI()
+    {
+        HideAllUI();
+        gameOverUI.SetActive(true);
+    }
 
 
 }
