@@ -147,7 +147,7 @@ public class GameStateManager : MonoBehaviour
     }
     public void OptionsBackButton()
     {
-        SetState(GameState.Paused);
+        SetState(previousState);
     }
     public void OptionsButton()
     {

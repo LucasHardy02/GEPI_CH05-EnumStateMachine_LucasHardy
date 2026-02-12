@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
         mainMenuUI.SetActive(false);
         pausedUI.SetActive(false);
         gameOverUI.SetActive(false);
+        optionsUI.SetActive(false);
     }
     public void ShowOptionsUI()
     {
